@@ -1,0 +1,17 @@
+.col-auto .form-control {
+    margin-right: 24%;
+    margin-left: 24%;
+    width: 50%;
+}
+
+.nav-manager {
+    display: flex;
+}
+
+.flex-manager .out {
+    width: 80%
+}
+
+.flex-manager {
+    display: flex;
+}
