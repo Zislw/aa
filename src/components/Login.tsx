@@ -2,7 +2,6 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
-import { UserModel } from '../models/User'
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { InputText } from 'primereact/inputtext';
@@ -13,12 +12,10 @@ import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import '../css/Login.css';
 import { useNavigate } from 'react-router';
-import Cookies from 'universal-cookie'
 export const Login = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [formData, setFormData] = useState({});
   const navigate = useNavigate()
-  const cookies = new Cookies()
   // fetch('http://localhost:8000/api/products', {
   //     method: 'POST',
   //     headers: {
@@ -64,14 +61,14 @@ export const Login = () => {
         },
         body: JSON.stringify(data)
       }
-
+      
       ).then(res => res.json())
         .then(data => {
-          if (data.err==null) {
+          if (data.err == null) {
             sessionStorage.setItem("token", data.token)
             navigate('../products')
           }
-          else{
+          else {
             navigate('/register')
           }
         })
@@ -81,6 +78,13 @@ export const Login = () => {
     }
 
   });
+  function onSignIn(googleUser:any) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
 
   const isFormFieldValid = (name: string) => !!((formik.touched as any)[name] && (formik.errors as any)[name]);
   const getFormErrorMessage = (name: string) => {
@@ -138,6 +142,10 @@ export const Login = () => {
           </form>
         </div>
       </div>
+      <div>
+         </div>
+       
+      {/* <div className="g-signin2" data-onsuccess="onSignIn"><input type="button" value="google"/></div> */}
     </div>
   );
 }

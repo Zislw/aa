@@ -1,38 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { ReactNode } from "react";
+import { Link, useLocation } from "react-router-dom";
 import '../css/Details.css'
-import img1 from '../pictures/0011.jpg' 
-import img2 from '../pictures/0012.jpg' 
-import img3 from '../pictures/0013.jpg' 
-import img4 from '../pictures/0014.jpg' 
-import img5 from '../pictures/0015.jpg' 
-export default class Details extends React.Component<any>{
-    
-//source=this.props.det.image
-source=null
+import { ProductModel } from "../models/Product";
 
-
-    render() {
+const Details =(props:any)=>{
+let location=useLocation()
+ let source=null
+ console.log((location.state as {more:ProductModel})?.more)
         return (<>
-        {console.log(this.props.det)
-        }
             <div className="details">
                 <div className=" ui card">
                     <div className="image">
-                        {this.source?
-                        <img src={this.source}/>:<i aria-hidden="true" className="icon yellow question circle big outline"></i>
+                        {source?
+                        <img src={source}/>:<i aria-hidden="true" className="icon yellow question circle big outline"></i>
                         }
                     </div>
                     <div className="content">
-                        <div className="header">{this.props.det.name}</div>
+                        <div className="header">{(location.state as {more:ProductModel}).more.name}</div>
                         <div className="description">
                             <div>
                                 <span>price:</span>
-                                <span>{this.props.det.price}</span>
+                                <span>{(location.state as {more:ProductModel}).more.price}</span>
                                 <i aria-hidden="true" className="icon dollar sign"></i>
                             </div>
-                            <div>amount:  {this.props.det.amount}</div>
-                            <div>description: {this.props.det.description}</div>
+                            <div>amount:  {(location.state as {more:ProductModel}).more.amount}</div>
+                            <div>description: {(location.state as {more:ProductModel}).more.description}</div>
 
 
                         </div>
@@ -43,5 +35,7 @@ source=null
                 </div>
             </div>
         </>)
-    }
+    
 }
+
+export default Details

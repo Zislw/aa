@@ -1,45 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import '../css/Manager.css'
 
-export default class Manager extends React.Component<{},{manager:boolean}> {
+const Manager =(props:any)=> {
 
-    refManagerName: React.RefObject<HTMLInputElement> = React.createRef();
-    refManagerPassword: React.RefObject<HTMLInputElement> = React.createRef();
+   let refManagerName: React.RefObject<HTMLInputElement> = React.createRef();
+   let refManagerPassword: React.RefObject<HTMLInputElement> = React.createRef();
+   let [manager,setManager]=useState(false)
+   
 
-    state = {
-        manager: false
-    }
-
-    iammanager = (refName: string = "", refPassword: string = "") => {
-        if (refName.trim() == "naomy" && refPassword.trim() == "8731") {
+   let iammanager = (refName: string = "", refPassword: string = "") => {
+        if (refName.trim() == "naomy"&& refPassword.trim() == "8731") {
             let bool = true
-            this.setState({ manager: bool })
+           setManager(bool)
         }
 
     }
 
 
-    render() {
+    
         return (
             <div>
-                {!this.state.manager && <form>
+                {!manager && <form>
                     <fieldset >
                         <legend>Manager Details:</legend>
                         <div className="col-auto">
                             <label className="form-label">Manager Name</label>
-                            <input type="text" className="form-control m-name" ref={this.refManagerName} placeholder="manager name" />
+                            <input type="text" className="form-control m-name" ref={refManagerName} placeholder="manager name" />
                         </div>
                         <div className="col-auto">
                             <label className="form-label">Manager Password</label>
-                            <input type="password" className="form-control m-password" ref={this.refManagerPassword} placeholder="manager password" />
+                            <input type="password" className="form-control m-password" ref={refManagerPassword} placeholder="manager password" />
                         </div>
                         <div className="col-auto">
-                            <button type="button" className="btn btn-primary" onClick={() => this.iammanager(this.refManagerName.current?.value, this.refManagerPassword.current?.value)}>ok</button>
+                            <button type="button" className="btn btn-primary" onClick={() => iammanager(refManagerName.current?.value, refManagerPassword.current?.value)}>ok</button>
                         </div>
                     </fieldset>
                 </form>}
-                {this.state.manager === true &&
+                {manager === true &&
                     <div className="flex-manager">
                         <div className="ui inverted pointing vertical menu">
                             <NavLink className={({ isActive }) => isActive ? 'item yellow active' : 'item'} to="addProduct">add product</NavLink>
@@ -53,4 +51,6 @@ export default class Manager extends React.Component<{},{manager:boolean}> {
             </div>
         )
     }
-}
+
+
+export default Manager

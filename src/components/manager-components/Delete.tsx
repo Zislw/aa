@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../store/actions/products";
 
 
-export default class Delete extends React.Component<any> {
+const Delete=(props:any)=> {
 
+let refId=useRef<HTMLInputElement|null>(null)
+let dispatch=useDispatch()
 
-    refId: React.RefObject<HTMLInputElement> = React.createRef();
-    constructor(props: any) {
-        super(props)
-
-    }
-
-
-    render() {
+   
         return (
             <>
                 <form>
@@ -19,14 +16,16 @@ export default class Delete extends React.Component<any> {
                         <legend>Delete Product</legend>
                         <div className="col-auto">
                             <label className="form-label">Product Id</label>
-                            <input type="text" className="form-control" ref={this.refId} placeholder="product id" />
+                            <input type="text" className="form-control" ref={refId} placeholder="product id" />
                         </div>
                         <div className="col-auto">
-                            <button type="button" className="btn btn-primary" onClick={() => this.props.delet(this.refId.current?.value)}>ok</button>
+                            <button type="button" className="btn btn-primary" onClick={() => dispatch(deleteProduct(refId.current?.value))}>ok</button>
                         </div>
                     </fieldset>
                 </form>
             </>
         )
     }
-}
+
+
+export default Delete

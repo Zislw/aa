@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../store/actions/products";
 
 
-export default class Add extends React.Component<any> {
+const Add=(props:any)=> {
      
+   let dispatch=useDispatch()
 
+   let refId= useRef<HTMLInputElement|null>(null)
+   let refName= useRef<HTMLInputElement|null>(null)
+   let refPrice=useRef<HTMLInputElement|null>(null)
+   let refAmount=useRef<HTMLInputElement|null>(null)
+   let refDescription=useRef<HTMLInputElement|null>(null)
+   let refImageDescription= useRef<HTMLInputElement|null>(null)
 
-    refId: React.RefObject<HTMLInputElement> = React.createRef();
-    refName: React.RefObject<HTMLInputElement> = React.createRef();
-    refPrice: React.RefObject<HTMLInputElement> = React.createRef();
-    refAmount: React.RefObject<HTMLInputElement> = React.createRef();
-    refDescription: React.RefObject<HTMLInputElement> = React.createRef();
-    refImageDescription:React.RefObject<HTMLInputElement> = React.createRef();
-
-    constructor(props: any) {
-        super(props)
     
-    }
-
-    render() {
+   
         return (
             <>
                 <form>
@@ -25,35 +23,37 @@ export default class Add extends React.Component<any> {
                         <legend>Add Product</legend>
                         <div className="col-auto">
                             <label className="form-label">Id</label>
-                            <input type="text" className="form-control" ref={this.refId} placeholder="product id" />
+                            <input type="text" className="form-control" ref={refId} placeholder="product id" />
                         </div>
                         <div className="col-auto">
                             <label className="form-label">Name</label>
-                            <input type="text" className="form-control" ref={this.refName} placeholder="product name" />
+                            <input type="text" className="form-control" ref={refName} placeholder="product name" />
                         </div>
                         <div className="col-auto">
                             <label className="form-label">Price</label>
-                            <input type="text" className="form-control" ref={this.refPrice} placeholder="price" />
+                            <input type="text" className="form-control" ref={refPrice} placeholder="price" />
                         </div>
                         <div className="col-auto">
                             <label className="form-label">Amount</label>
-                            <input type="text" className="form-control" ref={this.refAmount} placeholder="amount" />
+                            <input type="text" className="form-control" ref={refAmount} placeholder="amount" />
                         </div>
                         <div className="col-auto">
                             <label className="form-label">Description</label>
-                            <input type="text" className="form-control" ref={this.refDescription} placeholder="description" />
+                            <input type="text" className="form-control" ref={refDescription} placeholder="description" />
                         </div>
                         <div className="col-auto">
                             <label className="form-label">Image-Description</label>
-                            <input type="text" className="form-control" ref={this.refImageDescription} placeholder="image description" />
+                            <input type="text" className="form-control" ref={refImageDescription} placeholder="image description" />
                         </div>
                         <div className="col-auto">
                             
-                            <button type="button" className="btn btn-primary" onClick={() => this.props.add({"id":Number(this.refId.current?.value), "name":this.refName.current?.value,"price":Number(this.refPrice.current?.value),"amount": Number(this.refAmount.current?.value),"description":this.refDescription.current?.value,"image":this.refImageDescription.current?.value})}>ok</button>
+                            <button type="button" className="btn btn-primary" onClick={() =>dispatch(addProduct({"id":Number(refId.current?.value), "name":refName.current?.value,"price":Number(refPrice.current?.value),"amount": Number(refAmount.current?.value),"description":refDescription.current?.value,"image":refImageDescription.current?.value}))}>ok</button>
                         </div>
                     </fieldset>
                 </form>
             </>
         )
-    }
+    
 }
+
+export default Add

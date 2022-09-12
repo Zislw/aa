@@ -4,11 +4,9 @@ import { Outlet } from "react-router"
 import { Link, NavLink } from "react-router-dom";
 import "../css/Home.css"
 
-export default class Home extends React.Component {
-   render() {
 
-
-      return (<>
+const Home =(props:any)=> {
+   return (<>
          <h1>Welcome to My Site</h1>
          <div className="ui inverted menu">
             <NavLink className={({ isActive }) => isActive ? 'active yellow item' : 'item'} to={""} >home-page</NavLink>
@@ -18,9 +16,9 @@ export default class Home extends React.Component {
             <NavLink className={({ isActive }) => isActive ? 'active yellow item' : 'item'} to={"/about"}>about site</NavLink>
             <NavLink className={({ isActive }) => isActive ? 'active yellow item' : 'item'} to={"/manager"}>mamanger</NavLink>
          </div>
-       
          <Outlet />
       </>
       )
    }
-}
+
+export default Home
